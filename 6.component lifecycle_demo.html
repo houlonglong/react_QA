@@ -1,0 +1,88 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>学习React！！</title>
+</head>
+
+<body>
+<div id="app"></div>
+<script src="bower_components/react/react.js"></script>
+<script src="bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+	var MessageBox = React.createClass({
+		getInitialState:function(){
+			return {
+				count:0,
+				message:"传递数据"
+			};
+		},
+		getDefaultProps:function(){
+
+			return {};
+
+		},
+//		componentWillMount: function(){
+//
+//		},
+//		componentDidMount: function(){
+//
+//			return {};
+//		},
+//		componentWillUnmount:function(){
+//
+//		},
+		shouldComponentUpdate:function(nrexProp,nextState){
+			console.log('是不是组件更新')
+			console.log(nrexProp),
+			console.log(nextState)
+
+			if(nextState.count>3) return false
+			return true
+		},
+		componentWillUpdate:function(){
+			console.log("componentWillUpdate")
+		},
+		componentDidUpdate:function(){
+           console.log('组件更新过')
+		},
+		doUpdate:function(){
+			this.setState({
+				count:this.state.count+1
+			})
+		},
+		shanchu:function(){
+			React.unmountComponentAtNode(document.getElementById('app'));
+		},
+		render:function(){
+			//console.log('渲染')
+			return(
+					<div>{this.state.count}
+						<button onClick={this.shanchu} >删除</button>
+						<button  onClick={this.doUpdate}>手动更新组件(包括子组件)</button>
+						<Submeassage  message={this.state.message}/>
+					</div>
+			)
+		}
+
+	});
+	var Submeassage = React.createClass({
+		componentWillReceiveProps:function(){
+			console.log("子组件更新获取prop")
+		},
+		render:function(){
+			return(
+				<h1>{this.props.message}</h1>
+
+			)
+		}
+	});
+	var messageBox = React.render(<MessageBox/>,
+			document.getElementById('app')
+	)
+</script>
+
+
+</body>
+
+</html>

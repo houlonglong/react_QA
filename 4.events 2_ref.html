@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习React！！</title>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	p{
+		padding: 10px 0px;
+	}
+</style>
+</head>
+
+<body style="margin: 0;padding:0">
+    <div id="app"></div>
+    <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+		var FormApp = React.createClass({
+			getInitialState:function(){
+				return{
+					inputValue:'input value11',
+					selectValue:'A',
+					radioValue:'B',
+					checkValues:[],
+					textareaValue:'some text here,,,,,',
+				}
+			},
+			handleSubmit:function(e){
+				e.preventDefault();
+				//console.log(e);
+				console.log('请下面看');
+				//console.log(this.refs['input']);
+				//console.log(this.refs['input'].getDOMNode().value);
+				//console.log(React.findDOMNode(this.refs['input']).value);
+		        var formData = {
+					'input':this.refs['input'].getDOMNode().value,
+					'textarea': this.refs['textarea'].getDOMNode().value,
+					'select':this.refs['select'].getDOMNode().value,
+					'radio':this.state.radioValue,
+					'checkbox':this.state.checkValues
+				}
+				console.log(formData)
+			},
+			handRadio:function(e){
+				this.setState({
+					radioValue:e.target.value
+				});
+			},
+			checkbox:function(e){
+				var checkValues = this.state.checkValues.slice();
+					console.log(checkValues);
+				var newVal = e.target.value;
+				console.log(newVal);
+				var index =checkValues.indexOf(newVal);
+				if(index == -1) {
+					checkValues.push(newVal)
+				}else{
+					checkValues.splice(index,1)
+				}
+				this.setState({
+					checkValues:checkValues
+				})
+			},
+
+
+			render:function(){
+				return(
+						<form id='app' onSubmit={this.handleSubmit}>
+							<input  type="text" ref="input" defaultValue={this.state.inputValue}  /><br />
+							<p>选项</p>
+							<select defaultValue ={this.state.selectValue} ref="select">
+								<option value="A">A</option>
+								<option value="B">B</option>
+								<option value="C">C</option>
+								<option value="D">D</option>
+								<option value="E">E</option>
+							</select>
+							<p>单选</p>
+							<input onChange={this.handRadio} type="radio" value="A" name="goodRadio"  />
+							<input onChange={this.handRadio} type="radio" value="b" name="goodRadio"  value="b" />
+							<inpu  onChange={this.handRadio} type="radio" value="c" name="goodRadio" />
+							<p>多选</p>
+							<input onChange={this.checkbox} type="checkbox" value="A" name="checkbox"  />
+							<input onChange={this.checkbox} type="checkbox" value="b" name="checkbox" />
+							<input onChange={this.checkbox} type="checkbox" value="c" name="checkbox"  checked value="c" />
+							<p>文本框</p>
+							<textarea defaultValue ={this.state.textareaValue} ref="textarea"></textarea>
+							<p>按钮</p>
+							<button type="submit">提交</button>
+						</form>
+				)
+			}
+		})
+		var clickComonent = React.render(
+			<FormApp/>,
+			document.getElementById('app')
+		)
+	</script>
+
+
+</body>
+
+</html>

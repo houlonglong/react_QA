@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>学习React！！</title>
+    </head>
+    <body>
+        <div id="app">
+            <script src="bower_components/react/react.js"></script>
+            <script src="bower_components/react/JSXTransformer.js"></script>
+        </div>
+    <script type="text/jsx">
+        //
+        var MessageBox = React.createClass({
+            getInitialState:function(){
+                return{
+                    isVisible:true,
+                    title:'你好世界(龙龙)'
+                }
+            },
+            render:function(){
+                var styleobj = {
+                    display:this.state.isVisible ? 'block':'none',
+                }
+               return (
+                       <div>
+                           <Demo/>
+                           <h1 style ={styleobj}>{this.state.title}</h1>
+                           <Demo/>
+                           <Demo/>
+                           <Demo/>
+                       </div>
+               )
+            }
+
+        })
+
+        var Demo = React.createClass({
+            render:function(){
+                return (
+                        <h1>你好头部</h1>
+                )
+            }
+        })
+
+        var messageBox = React.render( <MessageBox/>,
+                document.getElementById('app'),
+                function(){
+                    console.log('渲染完成啦！！');
+                }
+        )
+    </script>
+    </body>
+</html>

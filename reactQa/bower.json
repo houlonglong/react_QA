@@ -1,0 +1,21 @@
+{
+  "name": "longlong",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "houlonglong <31363537@qq.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
